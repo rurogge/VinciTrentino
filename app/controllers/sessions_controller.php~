@@ -1,0 +1,8 @@
+<?php
+class SessionsController extends AppController {
+
+	var $name = 'Sessions';
+	var $scaffold;
+
+}
+?>

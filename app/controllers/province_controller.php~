@@ -1,0 +1,8 @@
+<?php
+class ProvinceController extends AppController {
+
+	var $name = 'Province';
+	var $scaffold;
+
+}
+?>

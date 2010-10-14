@@ -1,0 +1,64 @@
+<div id="mast">
+Ciao    <?php echo $session->read('Auth.User.name'); ?>
+    <?php echo $html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?>
+</div>
+
+<div class="userSessions index">
+	<h2><?php __('User Sessions');?></h2>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+			<th><?php echo $this->Paginator->sort('id');?></th>
+			<th><?php echo $this->Paginator->sort('user_id');?></th>
+			<th><?php echo $this->Paginator->sort('created');?></th>
+			<th><?php echo $this->Paginator->sort('modified');?></th>
+			<th><?php echo $this->Paginator->sort('correct_answers_number');?></th>
+			<th class="actions"><?php __('Actions');?></th>
+	</tr>
+	<?php
+	$i = 0;
+	foreach ($userSessions as $userSession):
+		$class = null;
+		if ($i++ % 2 == 0) {
+			$class = ' class="altrow"';
+		}
+	?>
+	<tr<?php echo $class;?>>
+		<td><?php echo $userSession['UserSession']['id']; ?>&nbsp;</td>
+		<td>
+			<?php echo $this->Html->link($userSession['User']['name'], array('controller' => 'users', 'action' => 'view', $userSession['User']['id'])); ?>
+		</td>
+		<td><?php echo $userSession['UserSession']['created']; ?>&nbsp;</td>
+		<td><?php echo $userSession['UserSession']['modified']; ?>&nbsp;</td>
+		<td><?php echo $userSession['UserSession']['correct_answers_number']; ?>&nbsp;</td>
+		<td class="actions">
+			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $userSession['UserSession']['id'])); ?>
+			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $userSession['UserSession']['id'])); ?>
+			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $userSession['UserSession']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $userSession['UserSession']['id'])); ?>
+		</td>
+	</tr>
+<?php endforeach; ?>
+	</table>
+	<p>
+	<?php
+	echo $this->Paginator->counter(array(
+	'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
+	));
+	?>	</p>
+
+	<div class="paging">
+		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
+	 | 	<?php echo $this->Paginator->numbers();?>
+ |
+		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
+	</div>
+</div>
+<div class="actions">
+	<h3><?php __('Actions'); ?></h3>
+	<ul>
+		<li><?php echo $this->Html->link(__('New User Session', true), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New User', true), array('controller' => 'users', 'action' => 'register')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Questions Sessions', true), array('controller' => 'questions_sessions', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Questions Sessions', true), array('controller' => 'questions_sessions', 'action' => 'add')); ?> </li>
+	</ul>
+</div>
